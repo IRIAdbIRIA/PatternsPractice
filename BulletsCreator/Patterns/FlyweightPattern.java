@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class FlyweightPattern {
 
     ArrayList<BulletUnit> bulletUnits = new ArrayList<>();
-    ArrayList<MovingBullet> movingBullets = new ArrayList<>();
 
     private class BulletUnit{
         private double weight;
@@ -25,13 +24,6 @@ public class FlyweightPattern {
             this.color = color;
         }
     }
-    private class MovingBullet{
-        private Vector3D vector;
-
-        private MovingBullet(Vector3D vector) {
-            this.vector = vector;
-        }
-    }
 
     public FlyweightPattern(){
         updateUnitsIfNeeded();
@@ -39,25 +31,26 @@ public class FlyweightPattern {
 
     public class BulletFromStates{
         private BulletUnit bulletUnit;
-        private MovingBullet movingBullet;
+        private Vector3D vector;
 
-        public BulletFromStates(BulletUnit bulletUnit, MovingBullet movingBullet) {
+        public BulletFromStates(BulletUnit bulletUnit, Vector3D vector) {
             this.bulletUnit = bulletUnit;
-            this.movingBullet = movingBullet;
+            this.vector = vector;
         }
 
         public BulletUnit getBulletUnit() {
             return bulletUnit;
         }
 
-        public MovingBullet getMovingBullet() {
-            return movingBullet;
+        public Vector3D getVector() {
+            return vector;
         }
     }
 
     public BulletFromStates makeBullets(){
         int someInt = 0;
-        return new BulletFromStates(bulletUnits.get(someInt),movingBullets.get(someInt));
+        double someDouble = 0;
+        return new BulletFromStates(bulletUnits.get(someInt),new Vector3D(someDouble,someDouble,someDouble));
     }
 
     private void updateUnitsIfNeeded(){
@@ -66,9 +59,6 @@ public class FlyweightPattern {
         for (int i = 0; i < someInt;i++) {
             if (true) {//should be something
                 bulletUnits.add(new BulletUnit(someDouble, someDouble, someDouble, someDouble, new Color(someInt, someInt, someInt)));
-            }
-            if (true) {//should be something
-                movingBullets.add(new MovingBullet(new Vector3D(someDouble, someDouble, someDouble)));
             }
         }
     }
